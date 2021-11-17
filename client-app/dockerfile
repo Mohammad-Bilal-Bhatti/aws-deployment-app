@@ -1,0 +1,16 @@
+# defining base image.
+FROM node:14.16.0-alpine3.13
+# specifing work directory - where we will copy our application files.
+WORKDIR /app
+# copy package.json files first - because they are 
+COPY package*.json .
+# install all the dependencies - when we create image
+RUN npm install 
+# copy everything from current directory into 'WORKDIR' specified above
+COPY . . 
+# set environment variable - optional
+ENV NODE_ENV=production
+# will tell on which port this application is bound to - optional - just for remembering purpose.
+EXPOSE 3000
+# this command will be executed when we run our container.
+CMD ["npm", "start"]
